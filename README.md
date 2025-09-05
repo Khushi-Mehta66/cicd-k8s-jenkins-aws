@@ -5,26 +5,6 @@
 
 This project demonstrates the complete DevOps lifecycle of deploying a React web application using a Jenkins CI/CD pipeline, Docker, SonarQube, Trivy, and Kubernetes on AWS.
 
-flowchart TD
-    A[Developer Push Code] --> B[Jenkins Pipeline]
-    
-    B --> B1[Clean Workspace]
-    B --> B2[Checkout Code from GitHub]
-    B2 --> B3[SonarQube Analysis]
-    B3 --> B4[Quality Gate]
-    B4 --> B5[Install Node Dependencies]
-    B5 --> B6[Build Docker Image]
-    B6 --> B7[Push Image to DockerHub]
-    B7 --> B8[Trivy Scan - Vulnerability Report]
-    B8 --> B9[Local Docker Run (Test)]
-    B9 --> B10[Deploy to Kubernetes on AWS]
-    
-    B10 --> C[Kubernetes Cluster]
-    C --> C1[Master Node - Deploy Pods]
-    C --> C2[Worker Node - Run React Containers]
-    
-    C --> D[End User Access via LoadBalancer]
-    
 ---
 
 ## 🧰 Tech Stack
