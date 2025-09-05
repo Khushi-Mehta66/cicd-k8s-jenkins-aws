@@ -1,0 +1,112 @@
+step:1 create Launch an AWS T2 Large Instance. Use the image as Ubuntu.
+
+step:2 vi jenkins.sh 
+
+step:3
+Script Run
+sudo chmod 777 jenkins.sh
+./jenkins.sh    # this will installl Jenkins
+
+step:4 
+Install Docker
+sudo apt-get update
+sudo apt-get install docker.io -y
+sudo usermod -aG docker $USER   #my case is ubuntu
+newgrp docker
+sudo chmod 777 /var/run/docker.sock
+
+step:5  
+Run SonarQube Container
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+login SonarQube http://<EC2-Public-IP>:9000
+
+step:6 
+Install Trivy
+vi trivy.sh
+
+step:7 
+Script run
+sudo chmod +x trivy.sh
+./trivy.sh
+
+step:8 
+Get Admin Password
+<EC2 Public IP Address:8080>
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+step:9 
+Jenkins in Browser:
+http://<EC2-Public-IP>:8080
+
+step:10 
+Jenkins GUI Configuration
+	
+Navigate to Manage Jenkins → Plugins → Available Plugins → 	Install below plugins
+
+Eclipse Temurin Installer (Install without restart)
+SonarQube Scanner (Install without restart)
+NodeJs Plugin 
+Terraform   
+Docker
+Docker Commons
+Docker Pipeline
+Docker API
+docker-build-step
+Kubernetes
+Kubernetes Credentials
+Kubernetes CLI
+Kubernetes Client API
+
+step:11
+Navigate to Manage Jenkins → Tools → Install JDK(17) → Click on Apply and Save
+ 
+jdk17 ---> 17.0.8.1+1
+node24 --> NodeJS 24.0.0
+sonar-scanner ---> 7.1.0.4889
+Docker --> latest
+terraform --> /usr/bin/
+	
+Add DockerHub Username and Password under Global Credentials
+	Kind = Username with password
+	Username =  your docker hub username
+	Password = docker hub password
+	ID = docker
+	Description = docker
+
+
+step:12
+Navigate to SonarQube page Click on Administration → Security → Users → Click on Tokens and Update Token → assign a name → and click on Generate Token
+copy Token with name Jenkins
+
+step:13 
+Navigate to Jenkins Dashboard → Manage Jenkins → Credentials → Add Secret Text. 
+ID : Sonar-token
+
+step:14 
+go to Dashboard → Manage Jenkins → System
+sonar-server --> http://<EC2-Public-IP>:9000
+
+step:15 
+go to SonarQube page 
+Administration–> Configuration–>Webhooks
+#in url section of quality gate
+jenkins
+<http://jenkins-public-ip:8080>/sonarqube-webhook/
+
+step:16
+Add kubelet
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/kubectl
+
+
+step:17
+goto Dashboard → Manage Jenkins → Tools → docker
+
+step:18
+go to ec2 
+sudo usermod -aG sudo ubuntu
+sudo apt update
+
+step:19
+Pipeline on jenkins
