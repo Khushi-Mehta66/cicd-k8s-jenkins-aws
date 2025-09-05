@@ -60,14 +60,14 @@ This project demonstrates the complete DevOps lifecycle of deploying a React web
 
 🗂️ Jenkins Configuration
 
-JDK Tool: jdk17 (17.0.8.1)
-NodeJS Tool: node24
-Sonar Scanner Tool: sonar-scanner (7.1.0)
-Docker Tool Name: docker
+- JDK Tool: jdk17 (17.0.8.1)
+- NodeJS Tool: node24
+- Sonar Scanner Tool: sonar-scanner (7.1.0)
+- Docker Tool Name: docker
 Credentials:
-DockerHub (username/password)
-Sonar-token (secret text)
-k8s (kubeconfig or username/password)
+- DockerHub (username/password)
+- Sonar-token (secret text)
+- k8s (kubeconfig or username/password)
 
 🧪 SonarQube & Trivy Integration
 
@@ -76,10 +76,10 @@ Trivy scans the Docker image and stores output in trivy.txt.
 
 📝 How to Run This Project
 
-Configure kubernetes master and slave node
-Clone the repo
-Setup SonarCube
-Setup Jenkins with required tools/plugins
-Configure credentials
-Add Jenkinsfile to pipeline job
-Run the job and check deployment in Kubernetes
+-> Configure kubernetes master and slave node
+-> Clone the repo
+-> Setup SonarCube
+-> Setup Jenkins with required tools/plugins
+-> Configure credentials
+-> Add Jenkinsfile to pipeline job
+-> Run the job and check deployment in Kubernetes
