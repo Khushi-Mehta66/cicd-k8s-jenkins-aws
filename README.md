@@ -49,10 +49,11 @@ This project demonstrates the complete DevOps lifecycle of deploying a React web
 
 ## 📂 Folder Structure
 
-├── Jenkins.txt
-├── pipeline
-├── k8s-ubuntu-master.txt
-├── k8s-ubuntu-slave.txt
+├── Jenkins-steps.txt
+├── pipeline.txt
+├── k8s-ubuntu-master.sh
+├── k8s-ubuntu-slave.sh
+├── install-docker.sh
 ├── trivy.sh
 ├── jenkins.sh
 ├── README.md
